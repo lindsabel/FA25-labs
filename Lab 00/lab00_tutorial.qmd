@@ -1,7 +1,7 @@
 ---
 title: "Intro to Quarto"
 subtitle: "BSTA 6100 Fall 2025 Lab 00"
-author: "Your Name Here"
+author: "Nicholas J. Seewald, PhD"
 date: "today"
 format:
   html:
@@ -11,9 +11,8 @@ format:
 ---
 
 :::{.callout-note}
-Materials in this lab are adapted from 
+Materials in this lab are partially adapted from *Introductory Statistics for the Life and Biomedical Sciences* by Julie Vu and Dave Harrington.
 :::
-
 
 ## Quarto
 
@@ -41,6 +40,7 @@ When you click the **Render** button in RStudio, a document will be generated th
 You can create a new R code chunk by either typing the three backticks (`) followed by an "r" enclosed in braces, then the additional three backticks to close the chunk, or simply press the *Insert Chunk* button from the *Chunks* menu on the far right of the toolbar on top of the script editor. 
 
 ### Tips for Quarto
+
 1. **Render and render often**: Frequently knitting your document will help you make sure that all your code works and that the document looks the way you want. You might even check the "Render on Save" button to help with this. (It's very useful!)
 1. **Don't be afraid to experiment**: Nobody gets things exactly right the first time, and we all forget how things work sometimes. Keep trying, and you'll eventually get what you want! Your computer won't explode if you get an error, so don't be afraid!
 1. **Use your resources**: Resources like [Quarto's reference manual](https://quarto.org/docs/reference/) and even Google are your friends! You should feel empowered to learn and troubleshoot errors on your own.
@@ -77,18 +77,91 @@ Additional formatting commands will be introduced gradually throughout the rest 
 To make a "comment" in an R Markdown document, use the syntax on the lines preceding and following this message. All the text within the 'arrows' does not appear in the knitted PDF, similar to how lines preceded with a # in R are not executed as code.
 --->
 
+## Intro to R
 
-### Using R with R Markdown
+### Using R with Quarto
 
 The real power of R Markdown is that it allows for R programs to be included in the Rmd file, with both the program and its output automatically being produced in the PDF document.
 
 R programs in an Rmd file are located in **code chunks**, which appear as grey-shaded blocks as shown below starting on line 60. You can embed an R code chunk by either typing the three backticks (`) followed by an "r" enclosed in braces, then the additional three backticks to close the chunk, or simply press the *Insert Chunk* button from the *Chunks* menu on the far right of the toolbar on top of the script editor. 
 
+### R as a Calculator
+At its most basic, R can be used as a calculator. The chunk below has 3 math expressions. To run all 3, click the green "Play" button (right-facing triangle) in the top right corner of the chunk. Alternatively, with the cursor on the single line of code you want to run, use the keyboard shortcut Ctrl/Cmd + Enter. (To run the full chunk, use Ctrl/Cmd + Shift + Enter.) Try entering several lines of arithmetic expressions and running them at once. The "`#`" symbol marks off text as 'comments', which are not run as code; this is a useful tool for making notes within the code.
 
-### R Script versus R Markdown
+```{r, eval = FALSE}
+#some arithmetic expressions
+8 + 3
+log(2)
+((121/3) * (6^3))/(pi)
+```
 
-An R Script file can be thought of as one large code chunk; R script files are only meant to contain R commands with short plain-text comments. R Markdown files consist of both code, output, and plain text.
+When you run the chunk, you'll see a `[1]` before each line of output. This is R telling you that the result is a *vector* and the `[1]` is just a helpful flag to help you keep the index straight. 
 
-R script files are useful when the primary goal is to explore a dataset or test short R programs. R Markdown files are ideal for preparing documents that need to contain both explanatory text and statistical output, such as a lab report. 
+- *SIDE NOTE:* R is "1-indexed" -- the first element is always the "1"th element. This is different from some other programming languages like Python, which is 0-indexed.
 
-Congratulations! You have reached the end of Lab 0. 
+All of the symbols you think you'd use to do math work: `+` for addition, `-` for subtraction, `*` for multiplication, `/` for division, `^` for exponentiation.
+
+### Assignment
+The previous calculations only produce output in the console. To save a value, assign it a name by using "`<-`". Entering the name of a value will return the value. For example, run:
+```{r, eval = FALSE}
+#create x and y
+x <- 8 + 3
+y <- log(2)
+
+#calculation
+x + y
+
+#define and return z
+z <- x * y
+z
+```
+
+We read code `x <- 8 + 3` as "`x` *gets* 36 / 6". The arrow is made using the less-than symbol (`<`, shift + comma on a US English keyboard) and a hyphen.
+
+Take a look at the Environment tab in the top right pane -- the values of `x`, `y`, and `z` are displayed. Any created data structures or loaded datasets will appear in this tab. All objects can be cleared by selecting the broom icon. 
+
+Note that R is case-sensitive; `x` and `X` are not the same. If you try to run `X`, an error will be returned since no value has been named `X`. If the same name is used again to define a new value, R will overwrite the previous information. For example, redefine `x`:
+```{r, eval = FALSE}
+#a semicolon (;) can be used to separate commands
+x <- 8 + 3; x
+x <- 21; x
+```
+
+When giving things names in R, you can only use a combination of letters, numbers, periods, and underscores, and the names have to start with a letter or a period. People tend to use underscores or periods instead of spaces. Errors saying "unexpected symbols" or "unexpected input" are R's way of telling you that these names are not allowed, and that you should use a different name.
+
+### Vectors
+Variables can not only contain single values, but also vectors or matrices of values. One simple way to create a vector is to use the `c()` function:
+
+```{r, eval = FALSE}
+#define and return vectors a and b
+a <- c(4.1, 6.7, 8.2, 1.8); a
+b <- 2*a; b
+```
+
+### Functions
+Use `mean()` and `sd()` to find the mean and standard deviation of the numbers in `a`:
+
+```{r, eval = FALSE}
+#calculate mean and standard deviation
+mean(a)
+sd(a)
+```
+
+Plots appear in the Plots tab in the lower right. Plot the values of `a` against the values of `b`:
+
+```{r, eval = FALSE}
+#plot a against b
+plot(a, b)
+```
+
+### Help
+R has help pages that are often useful; they typically contain a basic description and include syntax information. To look up what a certain function does, use `?`; for example, run `?mean` (in the console) and the help page for the `mean()` function will appear in the Help tab on the bottom right.
+
+### R Script versus Quarto
+
+An R Script file can be thought of as one large code chunk; R script files are only meant to contain R commands with short plain-text comments. Quarto files consist of both code, output, and plain text.
+
+R script files are useful when the primary goal is to explore a dataset or test short R programs. Quarto files are ideal for preparing documents that need to contain both explanatory text and statistical output, such as a lab report. 
+
+## Bonus: RStudio Customization
+The *RStudio* workspace can be customized easily. The panels can be rearranged by going to *Tools > Global Options > Pane Layout*. Other customization options (e.g., font size, themes, etc.) are available under *Global Options > Appearance*. I particularly like turning on rainbow parentheses: *Global Options > Code > Editing > Use rainbow parentheses*.

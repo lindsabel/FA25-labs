@@ -85,4 +85,5 @@ Replace this text with your bulleted list for Question 4.
 # Submission Instructions
 
 1. When you've completed this assignment, click Render one last time.
-1. Go to the Lab 0 assignment in Canvas and click
+1. Go to the Lab 0 assignment in Canvas and click "Start Assignment".
+1. Upload the rendered .html file (called "lab00_report.html") to Canvas, and click "Submit Assignment".
