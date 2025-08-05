@@ -1,0 +1,88 @@
+---
+title: "BSTA 6100 Lab 0 Report"
+author: "Your Name"
+date: "today"
+format:
+  html:
+    toc: true
+    toc-expand: true
+    theme: "zephyr"
+    css: ../assets/styles.css
+    embed-resources: true
+---
+
+**Collaborators:** If applicable, replace this text with the names of anyone you collaborated with on this project.
+
+-   Complete the following exercises designed to help get you up and running in R and RStudio.
+-   Keep your answers inside the ".answer" blocks. Do NOT delete the three colon blocks (`:::`) and keep your responses between them.
+-   Use the tutorial for help, and feel free to email Nick or Haedi with questions.
+
+# Lab Assignment
+
+## Question 1
+
+::: question
+We're going to start by playing a bit with Markdown syntax. Read carefully through the text below (in the `answer` block) and apply formatting to it as follows:
+
+1.  Make the text "Tips and Tricks for Quarto" bold.
+2.  Make the text "Knit and knit often" italic.
+3.  Make the text "Make sure your chunk syntax is correct" italic.
+4.  Make the text "Be persistent!" bold.
+:::
+
+::: answer
+Tips and Tricks for Quarto
+
+1.  Knit and knit often. You'll be turning in rendered documents for grading, and it's important that you know what they look like!
+2.  Make sure your chunk syntax is correct. You should only have one set of opening and closing backticks (\`\`\`) per chunk!
+3.  Be persistent! Learning R takes time, and it's okay if you don't get it right away. Just keep trying, and don't be afraid to ask for help!
+:::
+
+## Question 2
+
+::: question
+Use R as a calculator to compute the following values. Assign the first value the name `x`, the second value the name `y`, and the third `z`.
+$$\frac{27}{2 + 3^2}$$
+$$\frac{1}{3} + \frac{1}{5} \times 0.257$$
+$$92^3 - 734$$
+:::
+
+::: answer
+```{r question2, error = T}
+# Use this code chunk to write the code necessary to answer the question. Do not start your code on this line, and do not start your code with # (this is a comment, R will ignore it).
+
+```
+
+```{r question2Answers, error = T, collapse = F}
+# DO NOT EDIT THIS CHUNK: it's how we'll check your work. YOUR ANSWERS GO IN THE CHUNK ABOVE THIS ONE.
+x
+y
+z
+# DO NOT EDIT THIS CHUNK
+```
+:::
+
+## Question 3
+
+::: question
+Write a brief paragraph describing previous coursework in statistics (if any) and share something you hope to learn in this course.
+:::
+
+::: answer
+Replace this text with your answer to Question 3.
+:::
+
+## Question 4
+
+::: question
+Write a bulleted list giving your undergraduate institution, year of graduation, your field of study, and the country you are from. Under the entry for your country, include subitems with the name of your state and city.
+:::
+
+::: answer
+Replace this text with your bulleted list for Question 4.
+:::
+
+# Submission Instructions
+
+1. When you've completed this assignment, click Render one last time.
+1. Go to the Lab 0 assignment in Canvas and click

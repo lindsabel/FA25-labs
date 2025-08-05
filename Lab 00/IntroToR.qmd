@@ -1,0 +1,126 @@
+---
+title: "Intro to R, RStudio, and Quarto"
+subtitle: "BSTA 6100 Fall 2025"
+author: "Nicholas J. Seewald, PhD"
+format:
+  html:
+    theme: "zephyr"
+    toc: true
+    embed-resources: true
+---
+
+# Learning Objectives
+
+## R Learning Objectives
+1. Become familiar with the RStudio interface 
+1. Understand key components of a Quarto document
+1. Learn how to use R to do basic calculations
+1. Learn how to import data into R and name objects
+1. Learn how to subset data
+
+  
+# Getting Started
+
+## Terminology
+- **R** is a *statistical computing environment* that's designed for manipulating data, generating plots, and performing analyses. It's also a programming language. You'll be *using R* this semester.
+- **RStudio** is an *integrated development environment (IDE)* for R. It's an interface that makes working with R easier. You use R inside of RStudio. If R is ice cream, RStudio is the cone or cup.
+- **Quarto** is a *scientific and technical publishing system*. Quarto lets you to write analysis reports that combine R code, R output (plots, analysis results, etc.) and text in one document. This lab document is a Quarto document!
+  - Side note: Quarto is very flexible and can be used with different programming languages (e.g., Python) in different IDEs (e.g., Jupyter). The document structure translates across all of these!
+
+## Installing R, RStudio, and Quarto
+
+First, download R from <http://cran.us.r-project.org/>. Versions are available for Windows, macOS, and Linux. Follow the instructions when running the installation program, selecting the default options when prompted.
+
+RStudio can be downloaded from <https://posit.co/download/rstudio-desktop/>. Scroll down to "Install RStudio" and click the "Download RStudio Desktop" button, ensuring the webpage has correctly identified your computer's operating system. Install the downloaded package.
+
+Finally, install Quarto from <https://quarto.org/docs/get-started/> by clicking the "Download Quarto CLI" button, ensuring the webpage has correctly identified your computer's operating system. Install the downloaded package.
+
+# R and RStudio
+
+## The RStudio Console
+
+![](../assets/rstudio_annotated.jpg)
+
+The RStudio environment is organized into panes, with the default layout shown above; the script editor and console are on the top and bottom left, and there are additional panes on the right. The script editor is used to create and edit files, such as R script files. Multiple files can be open at once, and will appear as separate tabs. If the script editor is not visible, open a new file via *File > New File > R Script* to make the script editor reappear. When commands are run in the script editor, the commands and the corresponding output appear in the console. 
+
+RStudio can be used to create several types of files; the major two types of files are R Script files (`.R`) and Quarto document files (`.qmd`). An R Script file contains code that can be executed in the script editor. Saving code in a script file makes it easy to reuse or modify code at a later time. A Quarto document contains both code and plain text, and can be used to generate a PDF, HTML, or Word document that contains output (including figures or calculations) along with the text. 
+      
+The following section introduces the rest of the RStudio layout and describes the use of the script editor to enter commands. R Markdown will be introduced in the first lab exercise.
+
+### R and RStudio Tutorial
+
+1. Open a new R Script file via *File > New File > R Script*. While commands can be entered in either the script editor or the console, it is recommended to always use the script editor; code entered in the editor can be saved, as well as easily edited and re-run. 
+
+2. At its most basic, R can be used as a calculator. Enter `8 + 3` in the script editor and click the *Run* button at the top right of the script editor to send the command to the console, where the output will appear. Alternatively, with the cursor on the line of code, use the keyboard shortcut Ctrl/Cmd + Enter. Try entering several lines of arithmetic expressions and running them at once. The "`#`" symbol marks off text as 'comments', which are not run as code; this is a useful tool for making notes within the code.
+
+```{r, eval = FALSE}
+#some arithmetic expressions
+8 + 3
+log(2)
+((121/3) * (6^3))/(pi)
+```
+
+When you run the chunk, you'll see a `[1]` before the output of `35`. This is R telling you that the result is a *vector* and the `[1]` is just a helpful flag to help you keep the index straight. 
+
+- *SIDE NOTE:* R is "1-indexed" -- the first element is always the "1"th element. This is different from some other programming languages like Python, which is 0-indexed.
+
+All of the symbols you think you'd use to do math work: `+` for addition, `-` for subtraction, `*` for multiplication, `/` for division, `^` for exponentiation.
+
+3. The previous calculations only produce output in the console. To save a value, assign it a name by using "`<-`". Entering the name of a value will return the value. For example, run:
+
+```{r, eval = FALSE}
+#create x and y
+x <- 8 + 3
+y <- log(2)
+
+#calculation
+x + y
+
+#define and return z
+z <- x * y
+z
+```
+
+We read code `x <- 8 + 3` as "`x` *gets* 36 / 6". The arrow is made using the less-than symbol (`<`, shift + comma on a US English keyboard) and a hyphen.
+
+4. Take a look at the Environment tab in the top right pane -- the values of `x`, `y`, and `z`} are displayed. Any created data structures or loaded datasets will appear in this tab. All objects can be cleared by selecting the broom icon. 
+
+5. Note that R is case-sensitive; `x` and `X` are not the same. If you try to run `X`, an error will be returned since no value has been named `X`. If the same name is used again to define a new value, R will overwrite the previous information. For example, redefine `x`:
+
+```{r, eval = FALSE}
+#a semicolon (;) can be used to separate commands
+x <- 8 + 3; x
+x <- 21; x
+```
+
+When giving things names in R, you can only use a combination of letters, numbers, periods, and underscores, and the names have to start with a letter or a period. People tend to use underscores or periods instead of spaces. Errors saying "unexpected symbols" or "unexpected input" are R's way of telling you that these names are not allowed, and that you should use a different name.
+
+6. Variables can not only contain single values, but also vectors or matrices of values. One simple way to create a vector is to use the `c()` function:
+
+```{r, eval = FALSE}
+#define and return vectors a and b
+a <- c(4.1, 6.7, 8.2, 1.8); a
+b <- 2*a; b
+```
+
+7. Use `mean()` and `sd()` to find the mean and standard deviation of the numbers in `a`:
+
+```{r, eval = FALSE}
+#calculate mean and standard deviation
+mean(a)
+sd(a)
+```
+
+8. Plots appear in the Plots tab in the lower right. Plot the values of `a` against the values of `b`:
+
+```{r, eval = FALSE}
+#plot a against b
+plot(a, b)
+```
+
+9. R has help pages that are often useful; they typically contain a basic description and include syntax information. To look up what a certain function does, use `?`; for example, run `?mean` and the help page for the `mean()` function will appear in the Help tab on the bottom right.
+
+10. The Files tab shows all the files on the local computer; the "..." icon in the upper right corner opens up the directory in a separate window, which makes it easier to browse for a particular location. Save your script file via *File > Save As...* in a specific destination, such as the Desktop, then close the script file. Use the Files tab in the upper right pane to navigate to where the file is saved. Clicking on the script file reopens it in the script editor.
+
+11. Bonus: the *RStudio* workspace can be customized easily. The panels can be rearranged by going to *Tools > Global Options > Pane Layout*. Other customization options (e.g., font size, themes, etc.) are available under *Global Options > Appearance*. I particularly like turning on rainbow parentheses: *Global Options > Code > Editing > Use rainbow parentheses*.
+
