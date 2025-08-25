@@ -15,7 +15,7 @@ format:
 
 -   Complete the following exercises designed to help get you up and running in R and RStudio.
 -   Keep your answers inside the ".answer" blocks. Do NOT delete the three colon blocks (`:::`) and keep your responses between them.
--   Use the tutorial for help, and feel free to email Nick or Haedi with questions.
+-   Use the tutorial for help, and feel free to email Nick or Hong with questions.
 
 # Lab Assignment
 
