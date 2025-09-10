@@ -1,0 +1,440 @@
+---
+title: "Lab 01 Tutorial"
+subtitle: "BSTA 6100 Fall 2025 Lab 01"
+author: "Nicholas J. Seewald, PhD"
+date: "today"
+echo: true
+format: 
+  revealjs:
+    theme: simple
+    scrollable: true
+    smaller: false
+    embed-resources: true
+---
+
+## CSV files: a common way to store data
+
+CSV stands for "comma separated values" and is a commonly used file type for storing data. 
+Open the file "penguins.csv" from the files pane (lower right) to see what a .csv file looks like:
+
+![](assets/csv-demo.jpg)
+
+## CSV file structure
+Each row of the file is an "observation" or "case", and consists of one or more variables whose *values* are *separated* by *commas* (hey, look at that). The first row contains the names of the variables contained in the file.
+
+`"species","island","bill_length_mm","bill_depth_mm","flipper_length_mm","body_mass_g","sex","year"
+"Adelie","Torgersen",39.1,18.7,181,3750,"male",2007
+"Adelie","Torgersen",39.5,17.4,186,3800,"female",2007`
+
+
+## Palmer Penguins Data {.smaller}
+We're going to start by working with a data set with data on 333 penguins collected from 3 islands in the Palmer Archipeligo in Antarctica. Data were collected and made available by [Dr. Kristen Gorman](https://www.uaf.edu/cfos/people/faculty/detail/kristen-gorman.php)
+and the [Palmer Station, Antarctica LTER](https://pal.lternet.edu/), a member of the [Long Term Ecological Research Network](https://lternet.edu/), and the data were prepared by [Dr. Allison Horst](https://github.com/allisonhorst/palmerpenguins).
+
+![Artwork by @allison_horst](https://raw.githubusercontent.com/allisonhorst/palmerpenguins/main/man/figures/lter_penguins.png){}
+---
+## Reading CSV files into R
+We can **read** data into R using a function called `read.csv()`. The first argument to `read.csv()` is the name of a .csv file (here, `penguins.csv`), in quotes. We then store the results of `read.csv()` as an object called `penguins`.
+
+```{r}
+#| label: read-data
+#| echo: true
+penguins <- read.csv("penguins.csv", stringsAsFactors = TRUE)
+```
+
+The `penguins` object is called a `data.frame`.
+
+## Using `head()` to peek at a `data.frame`
+Let's see what's in the data. We can peek at the first few (6, specifically) rows of the data using the `head()` function:
+
+```{r}
+#| label: head-Penguins
+head(penguins)
+```
+We read that line as "*head* of *penguins*". Remember that `penguins` is what we named our data set. We can see that `penguins` contains a number of *variables*, like `species`, `island`, and more. 
+
+| Variable name | Description |
+|:--------------|:------------|
+|`species`| Penguin species (Ad&eacute;lie, Chinstrap, and Gentoo) |
+|`island`| Island in Palmer Archipeligo, Antarctica, on which the penguin was observed (Biscoe, Dream, or Torgersen) |
+|`bill_length_mm`| A number denoting bill length (in millimeters) |
+|`bill_depth_mm`| A number denoting bill depth (in millimeters) |
+|`flipper_length_mm`| A whole number denoting flipper length (in millimeters) |
+|`body_mass_g`| A whole number denoting penguin body mass (in grams) |
+|`sex`| Penguin sex (female, male) |
+|`year`| Study year (2007, 2008, 2009) |
+
+## Using `str()` to peek at a `data.frame`
+We can also peek at the data using a function called `str()` (pronounced "stir", short for "structure"):
+
+```{r}
+#| label: str-Penguins
+str(penguins)
+```
+
+## Frequency Tables
+
+Let's start with the `species` variable. Is this a categorical or quantitative variable? How do you know?
+
+To make a frequency table of a categorical variable, we use the `table()` function:
+
+```{r}
+#| label: table
+table(penguins$species)
+```
+
+So, there are 119 Gentoo penguins in the data. 
+
+## The `$` Operator
+
+Notice that we passed `penguins$species` to `table()`: we had to identify the `data.frame` that contains the variable `species`. The dollar sign ($) tells R to look inside the object on the left for the object on the right. 
+
+It's very important that you tell R *which data frame* the variable you're interested in is from. Let's see what happens when we don't:
+
+```{r}
+#| label: noDollarSign
+#| error: true
+species
+```
+:::aside
+**Side note:** If you were ever taught to use the `attach()` function to load a `data.frame` into the namespace, don't do that!
+:::
+
+## Two-Way Frequency Tables
+We can also make "two-way" frequency tables (sometimes called "contingency tables") to summarize counts for two categorical variables:
+
+```{r}
+#| label: two-way-table
+table(penguins$species, penguins$island)
+```
+
+Data is **R**eally **C**ool, so the first variable you give to `table()` is in the **r**ows of the table, and the second is in the **c**olumns.
+
+
+## Bar Charts in R
+
+Bar graphs / charts / plots can be used to visualize *categorical* data.
+  
+```{r}
+#| label: species-plot
+#| fig-width: 8
+barplot(table(penguins$species),
+     xlab = "Species",
+     ylab = "Frequency",
+     main = "Bar Chart of Number of Penguins of Each Species Observed",
+     col = c("darkorange1", "mediumorchid2", "darkcyan"))
+```
+
+## Bar Charts in R
+```{r}
+#| label: species-plot
+#| eval: false
+```
+
+- Note that we pass a `table` object to `barplot()` -- the function takes "heights" as input.
+- `xlab` is the x-axis label (in quotes)
+- `ylab` is the y-axis label (in quotes)
+- `main` is the main title (in quotes)
+- `col` is a *vector* of color names that are applied in order of the entries in the passed table.
+
+## Numerical Summaries
+
+Let's start with the `flipper_length_mm` variable. Is this a categorical or quantitative variable? How do you know?
+
+We can use R to summarize data numerically. We'll use the `summary()` function to do that for a given variable. Here, we'll summarize the `flipper_length_mm` variable, which is the length of the penguins' flippers (in millimeters). 
+
+```{r}
+#| label: flipperSummaries
+summary(penguins$flipper_length_mm)
+```
+
+You can always get just the one numerical summary you're looking for using the function for that specific summary:
+
+```{r}
+#| label: summaryFunctions
+#| error: true
+min(penguins$flipper_length_mm)
+mean(penguins$flipper_length_mm)
+median(penguins$flipper_length_mm)
+max(penguins$flipper_length_mm)
+sd(penguins$flipper_length_mm)
+IQR(penguins$flipper_length_mm)
+```
+
+## Boxplots in R
+
+Boxplots visualize the "5-number summary" (min, Q1, median, Q3, max) of a quantitative variable.
+
+```{r}
+#| label: boxplot
+boxplot(penguins$flipper_length_mm,
+        main = "Boxplot of Penguin Flipper Length",
+        ylab = "Flipper Length (mm)")
+```
+
+
+## Histograms in R
+
+Histograms can be used to visualize the distribution of a quantitative variable.
+
+```{r}
+#| label: hist
+hist(penguins$flipper_length_mm)
+```
+
+## Titles Are Important
+
+::::{.columns}
+:::{.column width="70%"}
+```{r}
+#| label: hist
+#| echo: false
+```
+:::
+
+:::{.column width="30%"}
+:::{.r-fit-text}
+Notice the unprofessional title and x-axis label: hardly anybody other than you understands your variable naming syntax.
+:::
+:::
+::::
+
+**Always** provide `main`, `xlab`, and `ylab` arguments as appropriate when making plots, unless you're doing something fast that you won't show anyone else.
+
+## Histograms in R
+Here's something better:
+
+```{r histLabels}
+hist(penguins$flipper_length_mm,
+     main = "Histogram of Penguin Flipper Length",
+     xlab = "Flipper Length (mm)")
+```
+
+
+## Subsetting
+
+Sometimes we want to only look at a certain section of our data. To do this, we'll create a *subset*.
+
+```{r}
+#| label: chinstrapSubset
+chinstrap <- subset(penguins, species == "Chinstrap")
+```
+
+- First argument is the `data.frame` you want to subset
+- Second argument is a *logical expression* (run `?Comparison` in the R console for help)
+  - Note the double equals (`==`)! This is *logical equals*, which is a comparison operator. `=` is an assigment operator, like `<-`.
+
+## Logical Expressions
+
+```{r}
+#| label: chinstrapSubset
+#| eval: false
+```
+
+Logical expressions (e.g., `species == "Chinstrap"`) implicitly create `TRUE`/`FALSE` ("Boolean") objects in R. The statement will be `TRUE` when an observation of the `species` variable is *exactly* "`Chinstrap`" (case-sensitive) and `FALSE` otherwise.
+
+**TRY IT!** Fill in the chunk below to create subsets for the other species of penguin.
+
+```{r speciesSubsets, error = T}
+adelie <- subset(penguins, species == "")
+gentoo <- subset(penguins, species == "")
+```
+
+## An alternative subset method
+
+R's `data.frame`s inherit properties of `array`s, which have rows and columns. (Remember that arrays are **R**eally **C**ool, so we always write **r**ows, **c**olumns.)
+
+We can select particular rows or columns using logical expressions using square brackets `[]`:
+  
+```{r bracketSubset}
+chinstrap2 <- penguins[penguins$species == "Chinstrap", ]
+```
+
+Since `penguins` is a two-dimensional array (like all `data.frame`s), we **must** specify conditions for both rows and columns. Leaving the blank space after the comma tells R to select *all* columns.
+
+```{r}
+all.equal(chinstrap, chinstrap2)
+```
+
+## Subsetting vectors
+
+Every variable in a `data.frame` is a `vector`: a 1-dimensional object. To subset it, we need only provide conditions on that single dimension.
+
+Let's subset `body_mass_g` by `sex`.
+
+```{r}
+table(penguins$sex)
+```
+
+The `sex` variable in this data is either `female` or `male` (note the lowercase names!).
+
+```{r bodyMassSubsets}
+male_body_mass <- penguins$body_mass_g[penguins$sex == "male"]
+female_body_mass <- penguins$body_mass_g[penguins$sex == "female"]
+```
+
+## Scatterplots in R
+
+::::{.columns}
+
+:::{.column width="40%"}
+::: {.r-fit-text}
+A **scatterplot** is a way to visualize relationships between two numeric variables. On the x-axis is typically the *"explanatory"* variable (denoted $x$), and on the y-axis is the *"response"* variable (denoted $y$). The data is paired *(x,y)*, then each pair is plotted using an open circle.
+
+The `plot()` function, when given two numeric variables, will create a scatterplot. The first argument to `plot()` is on the x axis; the second, on the y axis.
+:::
+:::
+
+:::{.column width="60%"}
+```{r}
+#| label: scatterplot-example
+plot(penguins$bill_length_mm, penguins$body_mass_g,
+     main = "Scatterplot of Penguin Bill Length versus Body Mass",
+     xlab = "Bill Length (mm)",
+     ylab = "Body Mass (g)")
+```
+:::
+::::
+
+## Describing Scatterplots
+
+When describing a bivariable relationship in a scatterplot, focus on:
+
+- Shape: is the relationship linear? non-linear?
+- Sign: is the general slope positive or negative?
+- Strength: how clear is the shape?
+- Unusual points: are there any points that noticeably deviate from the overall shape?
+- Clustering: Do the points group together in noticeable ways?
+
+## Describing Scatterplots
+
+::::{.columns}
+
+:::{.column width="60%"}
+```{r}
+#| label: scatterplot-example
+#| echo: false
+```
+:::
+
+:::{.column width="40%"}
+- Shape
+- Sign
+- Strength
+- Unusual points
+- Clustering
+:::
+::::
+
+## Adding Color to Scatterplots
+Notice that there might be some clustering happening. Let's color the plot by `species` to see if that might explain what we're seeing.
+
+```{r scatterplotColor}
+plot(penguins$flipper_length_mm, penguins$body_mass_g,
+     main = "Scatterplot of Body Mass vs. Flipper Length",
+     xlab = "Flipper Length (mm)",
+     ylab = "Body Mass (mm)",
+     col = c("darkorange1", "mediumorchid2", "darkcyan")[penguins$species])
+
+legend("topleft",
+       legend = c("Adelie", "Chinstrap", "Gentoo"),
+       col = c("darkorange1", "mediumorchid2", "darkcyan"),
+       pch = 1)
+```
+
+
+**NOTE:** The information in the legend is *not* tied to the plot by default. You can make a nonsense legend if you want (you don't want this). Make sure your legend matches your plot!
+
+## Changing Plotting Characters  
+Use the `pch` (`p`lotting `ch`aracter) argument to `plot()`. Set `pch` to the number corresponding to the point you want. The default is `1`, an open circle.
+
+![](assets/pch.png){width="100%"}
+
+Let's change the `pch` argument so that each species has a different color *and* plotting character.
+
+```{r}
+#| label: scatterplotLegendPCH
+plot(penguins$flipper_length_mm, penguins$body_mass_g,
+     main = "Scatterplot of Body Mass vs. Flipper Length",
+     xlab = "Flipper Length (mm)",
+     ylab = "Body Mass (mm)",
+     col = c("darkorange1", "mediumorchid2", "darkcyan")[penguins$species],
+     pch = c(0, 1, 2)[penguins$species])
+
+legend("topleft",
+       legend = c("Adelie", "Chinstrap", "Gentoo"),
+       col = c("darkorange1", "mediumorchid2", "darkcyan"),
+       pch = c(0, 1, 2))
+```
+
+## Use Color Meaningfully and with Restraint
+
+The primary function of a graphical display is to *convey information*. Everything that goes on your plot needs to have a purpose and must convey information.
+
+**Use color only to convey information, and don't rely on it too much.**
+
+- Color should only be used to convey differences of meaning in the data.
+- Many people are colorblind! Avoid red-green and blue-yellow combinations.
+- Have a fallback option to ensure clarity, like different plotting characters.
+- Use "HCL" (hue, chroma, luminance) color scales to choose colors that vary widely.
+- Use ColorBrewer to select palettes <https://colorbrewer2.org> or the `khroma` package ("Paul Tol colors").
+- Assume default colors are chosen poorly (looking at you, `ggplot2`).
+
+More tips: <https://nbisweden.github.io/Rcourse/files/rules_for_using_color.pdf>
+
+## Typos can be bad!
+If you forget the selector on the `col` or `pch` arguments, bad things happen!
+
+```{r}
+#| label: badColor
+#| output-location: slide
+
+plot(penguins$flipper_length_mm, penguins$body_mass_g,
+     main = "Scatterplot of Body Mass vs. Flipper Length",
+     xlab = "Flipper Length (mm)",
+     ylab = "Body Mass (mm)",
+     col = c("darkorange1", "mediumorchid2", "darkcyan"),
+     pch = c(0, 1, 2))
+```
+
+## 
+
+![](https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fweblium.com%2Fblog%2Fwp-content%2Fuploads%2F2020%2F09%2FDesign-7.png&f=1&nofb=1&ipt=db02dd0edf25a8cbde3f9b1773258df5793f94e5f9dabb220903c883dbc5c5eb)
+
+## The `~` Operator
+
+In R, we can use `~` (tilde, found underneath the Esc key in the top left corner of a U.S. English keyboard) as an operator that can be read as "by" (or "versus"). This operator has use in making several plots we have discussed in the past.
+
+Let's make side-by-side boxplots of the numeric variable `body_mass_g` by `species`.
+
+```{r}
+#| label: tildeExampleBoxplot
+boxplot(penguins$body_mass_g ~ penguins$species,
+        main = "Side-by-Side Boxplots of Body Mass by Penguin Species",
+        xlab = "Species",
+        ylab = "Body Mass in Grams")
+```
+
+We could also look at only two species by passing multiple arguments:
+
+```{r}
+boxplot(penguins$body_mass_g[penguins$species == "Adelie"],
+        penguins$body_mass_g[penguins$species == "Chinstrap"],
+        names = c("Adelie", "Chinstrap"),
+        main = "Side-by-Side Boxplots of Body Mass by Penguin Species",
+        xlab = "Species",
+        ylab = "Body Mass in Grams")
+```
+
+
+Let's go back to the scatterplot we made last week and update it to use the `~` operator. We will also update the code to reflect that we can now send to `plot` the name of the data set using the `data` argument, letting us skip the `$`.
+
+```{r lengthMassPlot}
+plot(body_mass_g ~ bill_length_mm,
+     data = penguins,
+     main = "Scatterplot of Penguin Body Mass versus Bill Length",
+     xlab = "Bill Length (mm)",
+     ylab = "Body Mass in (g)")
+```
+
+Notice the order here: the *y* variable (`body_mass_g`) is written first, then the tilde, then the *x* variable (`bill_length_mm`). This is because for scatterplots, the order is **y by x** or **y ~ x**. Be *very* careful setting up scatterplots! 

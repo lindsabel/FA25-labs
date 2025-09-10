@@ -1,0 +1,278 @@
+---
+title: "BSTA 6100 Lab 1 Report"
+author: "Your Name"
+date: "today"
+format:
+  html:
+    toc: true
+    toc-expand: true
+    theme: "zephyr"
+    css: ../assets/styles.css
+    embed-resources: true
+    number-sections: true
+crossref:
+  sec-prefix: Question
+---
+
+**Collaborators:** If applicable, replace this text with the names of anyone you collaborated with on this project.
+
+-  Complete the following exercises designed to help get you up and running in R and RStudio.
+- Use appropriate graphical and numerical summaries to justify all answers. Written responses without appropriate R code and results will receive no credit. Similarly, R output without written answers to the questions will receive no credit.
+-  Keep your answers inside the ".answer" blocks. Do NOT delete the three colon blocks (`:::`) and keep your responses between them.
+-   Use the tutorial for help, and feel free to email Nick or Hong with questions.
+
+## Background {.unnumbered}
+
+In the United States, individuals with developmental disabilities typically receive services and support from state governments. The State of California allocates funds to developmentally-disabled residents through the California Department of Developmental Services (DDS); individuals receiving DDS funds are referred to as 'consumers'. The dataset \texttt{dds.discr} represents a sample of 1,000 DDS consumers (out of a total population of approximately 250,000), and includes information about age, gender, ethnicity, and the amount of financial support per consumer provided by the DDS. The dataset is available in the \texttt{oibiostat} package.
+
+A team of researchers examined the mean annual expenditure on consumers by ethnicity, and found that the mean annual expenditures on Hispanic consumers was approximately one-third of the mean expenditures on White non-Hispanic consumers. As a result, an allegation of ethnic discrimination was brought against the California DDS.
+
+Does this finding represent sufficient evidence of ethnic discrimination, or might there be more to the story? This lab provides a walkthrough to conducting an exploratory analysis that not only investigates the relationship between two variables of interest, but also considers whether other variables might be influencing that relationship.
+
+### Data Setup {.unnumbered}
+
+Before getting started, install the `oibiostat` package by typing `install.packages("oibiostat")` in the R console (under the editor pane in RStudio), then enter/return. **R packages** contain code and data built and shared by others that are meant to extend R's functionality. R's extensibility is what makes it so powerful and popular!
+
+We can load the package using the `library()` function. Then, we can load a dataset that's contained in the package using the `data()` function. In this assignment, we'll be using a dataset named `ddr.discr` from the `oibiostat` package that contains the relevant data on California DDS.
+
+```{r}
+#| label: setup
+# DO NOT EDIT THIS CHUNK
+library(oibiostat)
+data("dds.discr")
+```
+
+After loading the data, you can find a description of the variables by typing `?dds.discr` in the R console, then enter/return.
+
+## Examining Data
+To begin understanding a dataset and developing a sense of context, start by examining the distributions of single variables.
+
+### Inspect the `data.frame`
+::: question
+Print the first 6 rows of the `dds.discr` data and the data structure.
+:::
+
+::: answer
+```{r}
+#| label: question1.1
+#| error: TRUE
+
+# Use this chunk for Question 1a
+```
+:::
+
+### Examine annual expenditures
+::: question
+Produce a histogram, boxplot, and numerical summaries to examine the distribution of annual expenditures. For most consumers, is the amount of financial support provided by the DDS relatively high or low?
+:::
+
+::: answer
+```{r}
+#| label: question1.2
+#| error: TRUE
+
+# Use this chunk for Question 1b
+```
+
+Replace this text with your written response.
+:::
+
+### Examine age
+::: question
+The variable `age` directly records a consumer's age; in the `age.cohort` variable, consumers are assigned to one of six age cohorts. Describe the distribution of age in this sample of consumers. Do consumers tend to be older or younger?
+:::
+
+::: answer
+```{r}
+#| label: question1.3
+#| error: TRUE
+
+# Use this chunk for Question 1c
+```
+
+Replace this text with your written response.
+:::
+
+### Examine ethnicity {#sec-examineEth}
+::: question
+Is there an equal representation of ethnic groups in this sample of consumers?
+:::
+
+::: answer
+```{r}
+#| label: question1.4
+#| error: TRUE
+
+# Use this chunk for code
+```
+
+Replace this text with your written response.
+:::
+
+### Examine gender
+::: question
+Does gender appear to be balanced in this sample of consumers?
+:::
+
+::: answer
+```{r}
+#| label: question1e
+#| error: TRUE
+
+# Use this chunk for Question 1e
+```
+
+Replace this text with your written response.
+:::
+
+## Multivariable Relationships
+
+After examining variables individually, explore how variables are related to each other. It is often useful to start by investigating the relationships between two variables, particularly between the primary response variable of interest and the exploratory variables. For this case study, the response variable is `expenditures`, the amount of funds the California DDS allocates annually to each consumer.
+
+### Expenditures by age
+::: question
+How do annual expenditures vary by age? Is there a large amount of variation in expenditures between age cohorts? Use the `age.cohort` variable, and produce appropriate graphical and numeric summaries.
+:::
+
+::: answer
+```{r}
+#| label: question2.1
+#| error: TRUE 
+
+# Use this code chunk to write the code necessary to answer the question. Do not start your code on this line, and do not start your code with # (this is a comment, R will ignore it).
+
+```
+
+Replace this text with your written answer.
+:::
+
+
+### Knowledge check: Subsetting
+:::question
+Make a histogram of expenditures among Hispanic males aged 22-50.
+:::
+
+::: answer
+```{r}
+#| label: question2.2
+#| error: TRUE 
+
+# Use this code chunk to write the code necessary to answer the question. Do not start your code on this line, and do not start your code with # (this is a comment, R will ignore it).
+
+```
+
+Replace this text with your written answer.
+:::
+
+### Expenditures by gender
+:::question
+Do annual expenditures seem to vary by gender? 
+:::
+
+::: answer
+```{r}
+#| label: question2.3
+#| error: TRUE 
+
+# Use this code chunk to write the code necessary to answer the question. Do not start your code on this line, and do not start your code with # (this is a comment, R will ignore it).
+
+```
+
+Replace this text with your written answer.
+:::
+
+### Expenditures by ethnic group
+:::question
+How does the distribution of expenditures vary by ethnic group? Does there seem to be a difference in the amount of funding that a person receives, on average, between different ethnicities? 
+:::
+
+::: answer
+```{r}
+#| label: question2.4
+#| error: TRUE 
+
+# Use this code chunk to write the code necessary to answer the question. Do not start your code on this line, and do not start your code with # (this is a comment, R will ignore it).
+
+```
+
+Replace this text with your written answer.
+:::
+
+## Dive Deeper
+
+As shown in @sec-examineEth, two of the ethnic groups, Hispanic and White non-Hispanic, comprise the majority of the data; some ethnic groups represent less than 10\% of the observations. For ethnic groups with relatively small sample sizes, it is possible that the observed samples are not representative of the larger populations. The rest of this analysis will focus on comparing how `expenditures` varies between the two largest ethnic groups.
+
+### Expenditures in Hispanic and non-Hispanic White consumers
+:::question
+Compare the distribution of `expenditures` between Hispanic and White non-Hispanic consumers, graphically and numerically. Do Hispanic consumers, on average, seem to receive less financial support from the California DDS than a White non-Hispanic consumer?
+:::
+
+::: answer
+```{r}
+#| label: question3.1
+#| error: TRUE 
+
+# Use this code chunk to write the code necessary to answer the question. Do not start your code on this line, and do not start your code with # (this is a comment, R will ignore it).
+
+```
+
+Replace this text with your written answer.
+:::
+
+
+### Ages of Hispanic and non-Hispanic White consumers
+
+When using data to investigate a question, it is important to explore not only how explanatory variables are related to the response variable(s), but also how explanatory variables influence each other.
+
+:::question
+Recall that expenditures is strongly associated with age---older individuals tend to receive more financial support. Is there also an association between age and ethnicity, for these two ethnic groups? Examine the distribution of age within each group and describe your findings.
+:::
+
+::: answer
+```{r}
+#| label: question3.2
+#| error: TRUE 
+
+# Use this code chunk to write the code necessary to answer the question. Do not start your code on this line, and do not start your code with # (this is a comment, R will ignore it).
+
+```
+
+Replace this text with your written answer.
+:::
+
+### Moderation of age-expenditure association
+
+Recall that a confounding variable is a variable that is associated with the response variable and the exploratory variable under consideration. In this setting, age is a confounder for the relationship between `expenditures` and `ethnicity`. Just as it would be incorrect to claim that sunscreen causes skin cancer, it is essential here to recognize that there is more to the story than the apparent association between `expenditures` and `ethnicity`.
+
+:::question
+For a closer look at the relationship between age, ethnicity, and expenditures, compare how average `expenditures` differs by ethnicity within each age cohort. If age is indeed the primary source of the observed variation in expenditures, then there should be little difference in average `expenditures` between individuals in different ethnic groups but the same age cohort. Is this the case? Describe your findings.
+:::
+
+::: answer
+```{r}
+#| label: question3.3
+#| error: TRUE 
+
+# Use this code chunk to write the code necessary to answer the question. Do not start your code on this line, and do not start your code with # (this is a comment, R will ignore it).
+
+```
+
+Replace this text with your written answer.
+:::
+
+## Conclusion
+
+:::question
+Based on this exploratory analysis, does there seem to be evidence of ethnic discrimination in the amount of financial support provided by the California DDS? Summarize your findings in language accessible to a non-statistician.
+:::
+
+::: answer
+Replace this text with your written answer.
+:::
+
+
+## Submission Instructions {.unnumbered}
+
+1. When you've completed this assignment, click Render one last time.
+1. Go to the Lab 1 assignment in Canvas and click "Start Assignment".
+1. Upload the **rendered .html file** (called "`lab01_report.html`") to Canvas, and click "Submit Assignment".

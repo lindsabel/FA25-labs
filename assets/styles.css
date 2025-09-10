@@ -9,9 +9,9 @@
 .question {
   font-size: 13pt;
   background: #f2f2f2;
-  padding: .25em 1em;
+  padding: .5em;
   box-shadow: 5px 5px #e5e5e5;
-  margin-bottom: 1.5em;
+  margin-bottom: 1em;
   margin-top: 1.5em;
   border-radius: 7px;
 }

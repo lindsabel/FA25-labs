@@ -10,18 +10,18 @@ format:
     embed-resources: true
 ---
 
-:::{.callout-note}
+::: callout-note
 Materials in this lab are partially adapted from *Introductory Statistics for the Life and Biomedical Sciences* by Julie Vu and Dave Harrington.
 :::
 
 ## Quarto
 
-This is a Quarto document. It's written (partially) in a syntax called [Markdown](https://quarto.org/docs/authoring/markdown-basics.html). Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. It was designed to simplify creating HTML documents, but the labs for this text are written to generate HTML documents.
-Throughout the course, we'll be using Quarto to prepare lab reports. 
+This is a Quarto document. It's written (partially) in a syntax called [Markdown](https://quarto.org/docs/authoring/markdown-basics.html). Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. It was designed to simplify creating HTML documents, but the labs for this text are written to generate HTML documents. Throughout the course, we'll be using Quarto to prepare lab reports.
 
 The first lines of this file (between `---`) are referred to as the **header**. Quarto is *very* fussy about the form of the header---the three dashed lines above and below lines 2-9 must appear exactly as in this document, and there must be a blank space between the colon and the descriptive text. Also, the title, author, and date fields must be kept within double quotes. The output line specifies the output format as HTML. You can find other theme options for HTML documents [here](https://bootswatch.com/).
 
 Quarto runs code contained in "chunks". A chunk looks like this:
+
 ```{r}
 #| label: hello-world
 
@@ -29,25 +29,25 @@ print("Hello world!")
 
 ```
 
-Notice that the code, `print("Hello world!")` is contained between three backticks (below the esc key on a US English keyboard, on the same key as the tilde) and the first set of backticks ends with `{r}`. This is how Quarto knows where your chunks start and stop. 
+Notice that the code, `print("Hello world!")` is contained between three backticks (below the esc key on a US English keyboard, on the same key as the tilde) and the first set of backticks ends with `{r}`. This is how Quarto knows where your chunks start and stop.
 
 You can run the code inside a single chunk by clicking the green "play" button in the upper right corner of the chunk. It's usually a good idea to click the "Run All Chunks Above" button immediately to the left of the play button first. So you should click Run All Chunks Above, then the play button.
 
 If you can't find the play button, just highlight the code you want to run and click the Run button in the top right corner of the editor pane.
 
-When you click the **Render** button in RStudio, a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. 
+When you click the **Render** button in RStudio, a document will be generated that includes both content as well as the output of any embedded R code chunks within the document.
 
-You can create a new R code chunk by either typing the three backticks (`) followed by an "r" enclosed in braces, then the additional three backticks to close the chunk, or simply press the *Insert Chunk* button from the *Chunks* menu on the far right of the toolbar on top of the script editor. 
+You can create a new R code chunk by either typing the three backticks (\`) followed by an "r" enclosed in braces, then the additional three backticks to close the chunk, or simply press the *Insert Chunk* button from the *Chunks* menu on the far right of the toolbar on top of the script editor.
 
 ### Tips for Quarto
 
-1. **Render and render often**: Frequently knitting your document will help you make sure that all your code works and that the document looks the way you want. You might even check the "Render on Save" button to help with this. (It's very useful!)
-1. **Don't be afraid to experiment**: Nobody gets things exactly right the first time, and we all forget how things work sometimes. Keep trying, and you'll eventually get what you want! Your computer won't explode if you get an error, so don't be afraid!
-1. **Use your resources**: Resources like [Quarto's reference manual](https://quarto.org/docs/reference/) and even Google are your friends! You should feel empowered to learn and troubleshoot errors on your own.
+1.  **Render and render often**: Frequently knitting your document will help you make sure that all your code works and that the document looks the way you want. You might even check the "Render on Save" button to help with this. (It's very useful!)
+2.  **Don't be afraid to experiment**: Nobody gets things exactly right the first time, and we all forget how things work sometimes. Keep trying, and you'll eventually get what you want! Your computer won't explode if you get an error, so don't be afraid!
+3.  **Use your resources**: Resources like [Quarto's reference manual](https://quarto.org/docs/reference/) and even Google are your friends! You should feel empowered to learn and troubleshoot errors on your own.
 
 The content of a Quarto document is created in the R Studio script editor. Formatting commands in the text are converted to a rendered document when you click on the *Render* button, located on the toolbar at the top of the script editor.
 
-In R Studio, the menu item *File > New File > Quarto Document...* choice produces a dialog box for output type. To create a new document, select *Document* from the left side of the dialog box, enter a name and title, choose HTML, and select OK. A template will open in the script editor, with file extension .qmd. Templates will be provided for all the lab exercises, and you will start by simply opening the template files, so there will almost never be a need to start a new file "from scratch" while working on these labs.
+In R Studio, the menu item *File \> New File \> Quarto Document...* choice produces a dialog box for output type. To create a new document, select *Document* from the left side of the dialog box, enter a name and title, choose HTML, and select OK. A template will open in the script editor, with file extension .qmd. Templates will be provided for all the lab exercises, and you will start by simply opening the template files, so there will almost never be a need to start a new file "from scratch" while working on these labs.
 
 Note that you *can* render to a PDF, but this requires additional software installation that is outside the scope of what we'll discuss in our labs.
 
@@ -55,27 +55,30 @@ Note that you *can* render to a PDF, but this requires additional software insta
 
 Plain text is prepared in paragraphs, as in the first part of this document. *Text* enclosed in asterisks is *italicized* in the PDF output. **Text** enclosed in double asterisks appears in **bold font**. There must be no space between the asterisks and the enclosed text. `Text` enclosed in backticks is formatted as if it's code (but will not be executed!).
 
-Bulleted lists are produced using the formatting syntax: 
+Bulleted lists are produced using the formatting syntax:
 
-- Item 1 
-- Item 2 
-    + Item 2a
-    + Item 2b
+-   Item 1
+-   Item 2
+    -   Item 2a
+    -   Item 2b
 
 The list must be preceded by a blank line, and 4 spaces should be used before sub-items.
 
+```{=html}
 <!---
 To make a "comment" in an R Markdown document, use the syntax on the lines preceding and following this message. All the text within the 'arrows' does not appear in the rendered document, similar to how lines preceded with a # in R are not executed as code.
 --->
+```
 
-
-Plain text is prepared in paragraphs, as in the first part of this document. *Text* enclosed in asterisks is *italicized* in the PDF output. **Text** enclosed in double asterisks appears in **bold font**.  There must be no space between the asterisks and the enclosed text.
+Plain text is prepared in paragraphs, as in the first part of this document. *Text* enclosed in asterisks is *italicized* in the PDF output. **Text** enclosed in double asterisks appears in **bold font**. There must be no space between the asterisks and the enclosed text.
 
 Additional formatting commands will be introduced gradually throughout the rest of the labs.
 
+```{=html}
 <!---
 To make a "comment" in an R Markdown document, use the syntax on the lines preceding and following this message. All the text within the 'arrows' does not appear in the knitted PDF, similar to how lines preceded with a # in R are not executed as code.
 --->
+```
 
 ## Intro to R
 
@@ -83,9 +86,10 @@ To make a "comment" in an R Markdown document, use the syntax on the lines prece
 
 The real power of R Markdown is that it allows for R programs to be included in the Rmd file, with both the program and its output automatically being produced in the PDF document.
 
-R programs in an Rmd file are located in **code chunks**, which appear as grey-shaded blocks as shown below starting on line 60. You can embed an R code chunk by either typing the three backticks (`) followed by an "r" enclosed in braces, then the additional three backticks to close the chunk, or simply press the *Insert Chunk* button from the *Chunks* menu on the far right of the toolbar on top of the script editor. 
+R programs in an Rmd file are located in **code chunks**, which appear as grey-shaded blocks as shown below starting on line 60. You can embed an R code chunk by either typing the three backticks (\`) followed by an "r" enclosed in braces, then the additional three backticks to close the chunk, or simply press the *Insert Chunk* button from the *Chunks* menu on the far right of the toolbar on top of the script editor.
 
 ### R as a Calculator
+
 At its most basic, R can be used as a calculator. The chunk below has 3 math expressions. To run all 3, click the green "Play" button (right-facing triangle) in the top right corner of the chunk. Alternatively, with the cursor on the single line of code you want to run, use the keyboard shortcut Ctrl/Cmd + Enter. (To run the full chunk, use Ctrl/Cmd + Shift + Enter.) Try entering several lines of arithmetic expressions and running them at once. The "`#`" symbol marks off text as 'comments', which are not run as code; this is a useful tool for making notes within the code.
 
 ```{r, eval = FALSE}
@@ -95,14 +99,16 @@ log(2)
 ((121/3) * (6^3))/(pi)
 ```
 
-When you run the chunk, you'll see a `[1]` before each line of output. This is R telling you that the result is a *vector* and the `[1]` is just a helpful flag to help you keep the index straight. 
+When you run the chunk, you'll see a `[1]` before each line of output. This is R telling you that the result is a *vector* and the `[1]` is just a helpful flag to help you keep the index straight.
 
-- *SIDE NOTE:* R is "1-indexed" -- the first element is always the "1"th element. This is different from some other programming languages like Python, which is 0-indexed.
+-   *SIDE NOTE:* R is "1-indexed" -- the first element is always the "1"th element. This is different from some other programming languages like Python, which is 0-indexed.
 
 All of the symbols you think you'd use to do math work: `+` for addition, `-` for subtraction, `*` for multiplication, `/` for division, `^` for exponentiation.
 
 ### Assignment
+
 The previous calculations only produce output in the console. To save a value, assign it a name by using "`<-`". Entering the name of a value will return the value. For example, run:
+
 ```{r, eval = FALSE}
 #create x and y
 x <- 8 + 3
@@ -118,9 +124,10 @@ z
 
 We read code `x <- 8 + 3` as "`x` *gets* 36 / 6". The arrow is made using the less-than symbol (`<`, shift + comma on a US English keyboard) and a hyphen.
 
-Take a look at the Environment tab in the top right pane -- the values of `x`, `y`, and `z` are displayed. Any created data structures or loaded datasets will appear in this tab. All objects can be cleared by selecting the broom icon. 
+Take a look at the Environment tab in the top right pane -- the values of `x`, `y`, and `z` are displayed. Any created data structures or loaded datasets will appear in this tab. All objects can be cleared by selecting the broom icon.
 
 Note that R is case-sensitive; `x` and `X` are not the same. If you try to run `X`, an error will be returned since no value has been named `X`. If the same name is used again to define a new value, R will overwrite the previous information. For example, redefine `x`:
+
 ```{r, eval = FALSE}
 #a semicolon (;) can be used to separate commands
 x <- 8 + 3; x
@@ -130,6 +137,7 @@ x <- 21; x
 When giving things names in R, you can only use a combination of letters, numbers, periods, and underscores, and the names have to start with a letter or a period. People tend to use underscores or periods instead of spaces. Errors saying "unexpected symbols" or "unexpected input" are R's way of telling you that these names are not allowed, and that you should use a different name.
 
 ### Vectors
+
 Variables can not only contain single values, but also vectors or matrices of values. One simple way to create a vector is to use the `c()` function:
 
 ```{r, eval = FALSE}
@@ -139,6 +147,7 @@ b <- 2*a; b
 ```
 
 ### Functions
+
 Use `mean()` and `sd()` to find the mean and standard deviation of the numbers in `a`:
 
 ```{r, eval = FALSE}
@@ -155,13 +164,15 @@ plot(a, b)
 ```
 
 ### Help
+
 R has help pages that are often useful; they typically contain a basic description and include syntax information. To look up what a certain function does, use `?`; for example, run `?mean` (in the console) and the help page for the `mean()` function will appear in the Help tab on the bottom right.
 
 ### R Script versus Quarto
 
 An R Script file can be thought of as one large code chunk; R script files are only meant to contain R commands with short plain-text comments. Quarto files consist of both code, output, and plain text.
 
-R script files are useful when the primary goal is to explore a dataset or test short R programs. Quarto files are ideal for preparing documents that need to contain both explanatory text and statistical output, such as a lab report. 
+R script files are useful when the primary goal is to explore a dataset or test short R programs. Quarto files are ideal for preparing documents that need to contain both explanatory text and statistical output, such as a lab report.
 
 ## Bonus: RStudio Customization
-The *RStudio* workspace can be customized easily. The panels can be rearranged by going to *Tools > Global Options > Pane Layout*. Other customization options (e.g., font size, themes, etc.) are available under *Global Options > Appearance*. I particularly like turning on rainbow parentheses: *Global Options > Code > Editing > Use rainbow parentheses*.
+
+The *RStudio* workspace can be customized easily. The panels can be rearranged by going to *Tools \> Global Options \> Pane Layout*. Other customization options (e.g., font size, themes, etc.) are available under *Global Options \> Appearance*. I particularly like turning on rainbow parentheses: *Global Options \> Code \> Editing \> Use rainbow parentheses*.
