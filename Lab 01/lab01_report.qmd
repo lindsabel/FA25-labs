@@ -57,7 +57,8 @@ Print the first 6 rows of the `dds.discr` data and the data structure.
 #| label: question1.1
 #| error: TRUE
 
-# Use this chunk for Question 1a
+# Use this code chunk to write the code necessary to answer the question. Do not start your code on this line, and do not start your code with # (this is a comment, R will ignore it).
+
 ```
 :::
 
@@ -71,7 +72,8 @@ Produce a histogram, boxplot, and numerical summaries to examine the distributio
 #| label: question1.2
 #| error: TRUE
 
-# Use this chunk for Question 1b
+# Use this code chunk to write the code necessary to answer the question. Do not start your code on this line, and do not start your code with # (this is a comment, R will ignore it).
+
 ```
 
 Replace this text with your written response.
@@ -87,7 +89,8 @@ The variable `age` directly records a consumer's age; in the `age.cohort` variab
 #| label: question1.3
 #| error: TRUE
 
-# Use this chunk for Question 1c
+# Use this code chunk to write the code necessary to answer the question. Do not start your code on this line, and do not start your code with # (this is a comment, R will ignore it).
+
 ```
 
 Replace this text with your written response.
@@ -103,7 +106,8 @@ Is there an equal representation of ethnic groups in this sample of consumers?
 #| label: question1.4
 #| error: TRUE
 
-# Use this chunk for code
+# Use this code chunk to write the code necessary to answer the question. Do not start your code on this line, and do not start your code with # (this is a comment, R will ignore it).
+
 ```
 
 Replace this text with your written response.
@@ -119,7 +123,8 @@ Does gender appear to be balanced in this sample of consumers?
 #| label: question1e
 #| error: TRUE
 
-# Use this chunk for Question 1e
+# Use this code chunk to write the code necessary to answer the question. Do not start your code on this line, and do not start your code with # (this is a comment, R will ignore it).
+
 ```
 
 Replace this text with your written response.
