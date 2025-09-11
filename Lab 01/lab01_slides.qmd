@@ -85,20 +85,23 @@ table(penguins$species)
 
 So, there are 119 Gentoo penguins in the data. 
 
-## The `$` Operator
+## The `$` Operator {.smaller}
 
 Notice that we passed `penguins$species` to `table()`: we had to identify the `data.frame` that contains the variable `species`. The dollar sign ($) tells R to look inside the object on the left for the object on the right. 
 
 It's very important that you tell R *which data frame* the variable you're interested in is from. Let's see what happens when we don't:
+:::
 
 ```{r}
 #| label: noDollarSign
 #| error: true
 species
 ```
-:::aside
-**Side note:** If you were ever taught to use the `attach()` function to load a `data.frame` into the namespace, don't do that!
-:::
+
+**Side note 1:** If you were ever taught to use the `attach()` function to load a `data.frame` into the namespace, don't do that!
+
+
+**Side note 2:** When writing *text* in Quarto, if you want to use \$, you must *escape* it with `\`. Write `\$500` instead of `$500`.
 
 ## Two-Way Frequency Tables
 We can also make "two-way" frequency tables (sometimes called "contingency tables") to summarize counts for two categorical variables:

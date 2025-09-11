@@ -15,3 +15,29 @@
   margin-top: 1.5em;
   border-radius: 7px;
 }
+
+.background {
+  font-size: 13pt;
+  background: #e5f5fb;
+  padding: .25em 1em;
+  margin-bottom: 1.5em;
+  border-radius: 10px;
+}
+
+.scoring {
+  font-size: 14pt;
+  background: #ffefbc;
+  padding: .25em 1em;
+  margin-top: 2em;
+  box-shadow: 5px 5px #e5e5e5;
+  border-radius: 10px;
+}
+
+.grading-comments {
+  font-size: 14pt;
+  background: #e1e9ee;
+  padding: .25em 1em;
+  margin-top: 2em;
+  box-shadow: 5px 5px #e5e5e5;
+  border-radius: 10px;
+}
