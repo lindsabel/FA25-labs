@@ -14,26 +14,24 @@ format:
 
 ## CSV files: a common way to store data
 
-CSV stands for "comma separated values" and is a commonly used file type for storing data. 
-Open the file "penguins.csv" from the files pane (lower right) to see what a .csv file looks like:
+CSV stands for "comma separated values" and is a commonly used file type for storing data. Open the file "penguins.csv" from the files pane (lower right) to see what a .csv file looks like:
 
 ![](assets/csv-demo.jpg)
 
 ## CSV file structure
+
 Each row of the file is an "observation" or "case", and consists of one or more variables whose *values* are *separated* by *commas* (hey, look at that). The first row contains the names of the variables contained in the file.
 
-`"species","island","bill_length_mm","bill_depth_mm","flipper_length_mm","body_mass_g","sex","year"
-"Adelie","Torgersen",39.1,18.7,181,3750,"male",2007
-"Adelie","Torgersen",39.5,17.4,186,3800,"female",2007`
-
+`"species","island","bill_length_mm","bill_depth_mm","flipper_length_mm","body_mass_g","sex","year" "Adelie","Torgersen",39.1,18.7,181,3750,"male",2007 "Adelie","Torgersen",39.5,17.4,186,3800,"female",2007`
 
 ## Palmer Penguins Data {.smaller}
-We're going to start by working with a data set with data on 333 penguins collected from 3 islands in the Palmer Archipeligo in Antarctica. Data were collected and made available by [Dr. Kristen Gorman](https://www.uaf.edu/cfos/people/faculty/detail/kristen-gorman.php)
-and the [Palmer Station, Antarctica LTER](https://pal.lternet.edu/), a member of the [Long Term Ecological Research Network](https://lternet.edu/), and the data were prepared by [Dr. Allison Horst](https://github.com/allisonhorst/palmerpenguins).
 
-![Artwork by @allison_horst](https://raw.githubusercontent.com/allisonhorst/palmerpenguins/main/man/figures/lter_penguins.png){}
----
+We're going to start by working with a data set with data on 333 penguins collected from 3 islands in the Palmer Archipeligo in Antarctica. Data were collected and made available by [Dr. Kristen Gorman](https://www.uaf.edu/cfos/people/faculty/detail/kristen-gorman.php) and the [Palmer Station, Antarctica LTER](https://pal.lternet.edu/), a member of the [Long Term Ecological Research Network](https://lternet.edu/), and the data were prepared by [Dr. Allison Horst](https://github.com/allisonhorst/palmerpenguins).
+
+## ![Artwork by ](https://raw.githubusercontent.com/allisonhorst/palmerpenguins/main/man/figures/lter_penguins.png)
+
 ## Reading CSV files into R
+
 We can **read** data into R using a function called `read.csv()`. The first argument to `read.csv()` is the name of a .csv file (here, `penguins.csv`), in quotes. We then store the results of `read.csv()` as an object called `penguins`.
 
 ```{r}
@@ -45,26 +43,29 @@ penguins <- read.csv("penguins.csv", stringsAsFactors = TRUE)
 The `penguins` object is called a `data.frame`.
 
 ## Using `head()` to peek at a `data.frame`
+
 Let's see what's in the data. We can peek at the first few (6, specifically) rows of the data using the `head()` function:
 
 ```{r}
 #| label: head-Penguins
 head(penguins)
 ```
-We read that line as "*head* of *penguins*". Remember that `penguins` is what we named our data set. We can see that `penguins` contains a number of *variables*, like `species`, `island`, and more. 
+
+We read that line as "*head* of *penguins*". Remember that `penguins` is what we named our data set. We can see that `penguins` contains a number of *variables*, like `species`, `island`, and more.
 
 | Variable name | Description |
-|:--------------|:------------|
-|`species`| Penguin species (Ad&eacute;lie, Chinstrap, and Gentoo) |
-|`island`| Island in Palmer Archipeligo, Antarctica, on which the penguin was observed (Biscoe, Dream, or Torgersen) |
-|`bill_length_mm`| A number denoting bill length (in millimeters) |
-|`bill_depth_mm`| A number denoting bill depth (in millimeters) |
-|`flipper_length_mm`| A whole number denoting flipper length (in millimeters) |
-|`body_mass_g`| A whole number denoting penguin body mass (in grams) |
-|`sex`| Penguin sex (female, male) |
-|`year`| Study year (2007, 2008, 2009) |
+|:-------------------------------------|:--------------------------------|
+| `species` | Penguin species (Adélie, Chinstrap, and Gentoo) |
+| `island` | Island in Palmer Archipeligo, Antarctica, on which the penguin was observed (Biscoe, Dream, or Torgersen) |
+| `bill_length_mm` | A number denoting bill length (in millimeters) |
+| `bill_depth_mm` | A number denoting bill depth (in millimeters) |
+| `flipper_length_mm` | A whole number denoting flipper length (in millimeters) |
+| `body_mass_g` | A whole number denoting penguin body mass (in grams) |
+| `sex` | Penguin sex (female, male) |
+| `year` | Study year (2007, 2008, 2009) |
 
 ## Using `str()` to peek at a `data.frame`
+
 We can also peek at the data using a function called `str()` (pronounced "stir", short for "structure"):
 
 ```{r}
@@ -83,14 +84,21 @@ To make a frequency table of a categorical variable, we use the `table()` functi
 table(penguins$species)
 ```
 
-So, there are 119 Gentoo penguins in the data. 
+So, there are 119 Gentoo penguins in the data.
+
+## Proportion Tables
+Pass a `table` to `prop.table()` to get a table of proportions:
+
+```{r}
+prop.table(table(penguins$species))
+```
+
 
 ## The `$` Operator {.smaller}
 
-Notice that we passed `penguins$species` to `table()`: we had to identify the `data.frame` that contains the variable `species`. The dollar sign ($) tells R to look inside the object on the left for the object on the right. 
+Notice that we passed `penguins$species` to `table()`: we had to identify the `data.frame` that contains the variable `species`. The dollar sign (\$) tells R to look inside the object on the left for the object on the right.
 
-It's very important that you tell R *which data frame* the variable you're interested in is from. Let's see what happens when we don't:
-:::
+It's very important that you tell R *which data frame* the variable you're interested in is from. Let's see what happens when we don't: 
 
 ```{r}
 #| label: noDollarSign
@@ -100,10 +108,10 @@ species
 
 **Side note 1:** If you were ever taught to use the `attach()` function to load a `data.frame` into the namespace, don't do that!
 
-
 **Side note 2:** When writing *text* in Quarto, if you want to use \$, you must *escape* it with `\`. Write `\$500` instead of `$500`.
 
 ## Two-Way Frequency Tables
+
 We can also make "two-way" frequency tables (sometimes called "contingency tables") to summarize counts for two categorical variables:
 
 ```{r}
@@ -113,11 +121,10 @@ table(penguins$species, penguins$island)
 
 Data is **R**eally **C**ool, so the first variable you give to `table()` is in the **r**ows of the table, and the second is in the **c**olumns.
 
-
 ## Bar Charts in R
 
 Bar graphs / charts / plots can be used to visualize *categorical* data.
-  
+
 ```{r}
 #| label: species-plot
 #| fig-width: 8
@@ -129,22 +136,23 @@ barplot(table(penguins$species),
 ```
 
 ## Bar Charts in R
+
 ```{r}
 #| label: species-plot
 #| eval: false
 ```
 
-- Note that we pass a `table` object to `barplot()` -- the function takes "heights" as input.
-- `xlab` is the x-axis label (in quotes)
-- `ylab` is the y-axis label (in quotes)
-- `main` is the main title (in quotes)
-- `col` is a *vector* of color names that are applied in order of the entries in the passed table.
+-   Note that we pass a `table` object to `barplot()` -- the function takes "heights" as input.
+-   `xlab` is the x-axis label (in quotes)
+-   `ylab` is the y-axis label (in quotes)
+-   `main` is the main title (in quotes)
+-   `col` is a *vector* of color names that are applied in order of the entries in the passed table.
 
 ## Numerical Summaries
 
 Let's start with the `flipper_length_mm` variable. Is this a categorical or quantitative variable? How do you know?
 
-We can use R to summarize data numerically. We'll use the `summary()` function to do that for a given variable. Here, we'll summarize the `flipper_length_mm` variable, which is the length of the penguins' flippers (in millimeters). 
+We can use R to summarize data numerically. We'll use the `summary()` function to do that for a given variable. Here, we'll summarize the `flipper_length_mm` variable, which is the length of the penguins' flippers (in millimeters).
 
 ```{r}
 #| label: flipperSummaries
@@ -175,7 +183,6 @@ boxplot(penguins$flipper_length_mm,
         ylab = "Flipper Length (mm)")
 ```
 
-
 ## Histograms in R
 
 Histograms can be used to visualize the distribution of a quantitative variable.
@@ -187,24 +194,25 @@ hist(penguins$flipper_length_mm)
 
 ## Titles Are Important
 
-::::{.columns}
-:::{.column width="70%"}
+:::::: columns
+::: {.column width="70%"}
 ```{r}
 #| label: hist
 #| echo: false
 ```
 :::
 
-:::{.column width="30%"}
-:::{.r-fit-text}
+:::: {.column width="30%"}
+::: r-fit-text
 Notice the unprofessional title and x-axis label: hardly anybody other than you understands your variable naming syntax.
 :::
-:::
 ::::
+::::::
 
 **Always** provide `main`, `xlab`, and `ylab` arguments as appropriate when making plots, unless you're doing something fast that you won't show anyone else.
 
 ## Histograms in R
+
 Here's something better:
 
 ```{r histLabels}
@@ -212,7 +220,6 @@ hist(penguins$flipper_length_mm,
      main = "Histogram of Penguin Flipper Length",
      xlab = "Flipper Length (mm)")
 ```
-
 
 ## Subsetting
 
@@ -223,9 +230,9 @@ Sometimes we want to only look at a certain section of our data. To do this, we'
 chinstrap <- subset(penguins, species == "Chinstrap")
 ```
 
-- First argument is the `data.frame` you want to subset
-- Second argument is a *logical expression* (run `?Comparison` in the R console for help)
-  - Note the double equals (`==`)! This is *logical equals*, which is a comparison operator. `=` is an assigment operator, like `<-`.
+-   First argument is the `data.frame` you want to subset
+-   Second argument is a *logical expression* (run `?Comparison` in the R console for help)
+    -   Note the double equals (`==`)! This is *logical equals*, which is a comparison operator. `=` is an assigment operator, like `<-`.
 
 ## Logical Expressions
 
@@ -248,7 +255,7 @@ gentoo <- subset(penguins, species == "")
 R's `data.frame`s inherit properties of `array`s, which have rows and columns. (Remember that arrays are **R**eally **C**ool, so we always write **r**ows, **c**olumns.)
 
 We can select particular rows or columns using logical expressions using square brackets `[]`:
-  
+
 ```{r bracketSubset}
 chinstrap2 <- penguins[penguins$species == "Chinstrap", ]
 ```
@@ -278,17 +285,16 @@ female_body_mass <- penguins$body_mass_g[penguins$sex == "female"]
 
 ## Scatterplots in R
 
-::::{.columns}
-
-:::{.column width="40%"}
-::: {.r-fit-text}
+:::::: columns
+:::: {.column width="40%"}
+::: r-fit-text
 A **scatterplot** is a way to visualize relationships between two numeric variables. On the x-axis is typically the *"explanatory"* variable (denoted $x$), and on the y-axis is the *"response"* variable (denoted $y$). The data is paired *(x,y)*, then each pair is plotted using an open circle.
 
 The `plot()` function, when given two numeric variables, will create a scatterplot. The first argument to `plot()` is on the x axis; the second, on the y axis.
 :::
-:::
+::::
 
-:::{.column width="60%"}
+::: {.column width="60%"}
 ```{r}
 #| label: scatterplot-example
 plot(penguins$bill_length_mm, penguins$body_mass_g,
@@ -297,39 +303,39 @@ plot(penguins$bill_length_mm, penguins$body_mass_g,
      ylab = "Body Mass (g)")
 ```
 :::
-::::
+::::::
 
 ## Describing Scatterplots
 
 When describing a bivariable relationship in a scatterplot, focus on:
 
-- Shape: is the relationship linear? non-linear?
-- Sign: is the general slope positive or negative?
-- Strength: how clear is the shape?
-- Unusual points: are there any points that noticeably deviate from the overall shape?
-- Clustering: Do the points group together in noticeable ways?
+-   Shape: is the relationship linear? non-linear?
+-   Sign: is the general slope positive or negative?
+-   Strength: how clear is the shape?
+-   Unusual points: are there any points that noticeably deviate from the overall shape?
+-   Clustering: Do the points group together in noticeable ways?
 
 ## Describing Scatterplots
 
-::::{.columns}
-
-:::{.column width="60%"}
+::::: columns
+::: {.column width="60%"}
 ```{r}
 #| label: scatterplot-example
 #| echo: false
 ```
 :::
 
-:::{.column width="40%"}
-- Shape
-- Sign
-- Strength
-- Unusual points
-- Clustering
+::: {.column width="40%"}
+-   Shape
+-   Sign
+-   Strength
+-   Unusual points
+-   Clustering
 :::
-::::
+:::::
 
 ## Adding Color to Scatterplots
+
 Notice that there might be some clustering happening. Let's color the plot by `species` to see if that might explain what we're seeing.
 
 ```{r scatterplotColor}
@@ -345,10 +351,10 @@ legend("topleft",
        pch = 1)
 ```
 
-
 **NOTE:** The information in the legend is *not* tied to the plot by default. You can make a nonsense legend if you want (you don't want this). Make sure your legend matches your plot!
 
-## Changing Plotting Characters  
+## Changing Plotting Characters
+
 Use the `pch` (`p`lotting `ch`aracter) argument to `plot()`. Set `pch` to the number corresponding to the point you want. The default is `1`, an open circle.
 
 ![](assets/pch.png){width="100%"}
@@ -376,16 +382,17 @@ The primary function of a graphical display is to *convey information*. Everythi
 
 **Use color only to convey information, and don't rely on it too much.**
 
-- Color should only be used to convey differences of meaning in the data.
-- Many people are colorblind! Avoid red-green and blue-yellow combinations.
-- Have a fallback option to ensure clarity, like different plotting characters.
-- Use "HCL" (hue, chroma, luminance) color scales to choose colors that vary widely.
-- Use ColorBrewer to select palettes <https://colorbrewer2.org> or the `khroma` package ("Paul Tol colors").
-- Assume default colors are chosen poorly (looking at you, `ggplot2`).
+-   Color should only be used to convey differences of meaning in the data.
+-   Many people are colorblind! Avoid red-green and blue-yellow combinations.
+-   Have a fallback option to ensure clarity, like different plotting characters.
+-   Use "HCL" (hue, chroma, luminance) color scales to choose colors that vary widely.
+-   Use ColorBrewer to select palettes <https://colorbrewer2.org> or the `khroma` package ("Paul Tol colors").
+-   Assume default colors are chosen poorly (looking at you, `ggplot2`).
 
 More tips: <https://nbisweden.github.io/Rcourse/files/rules_for_using_color.pdf>
 
 ## Typos can be bad!
+
 If you forget the selector on the `col` or `pch` arguments, bad things happen!
 
 ```{r}
@@ -429,7 +436,6 @@ boxplot(penguins$body_mass_g[penguins$species == "Adelie"],
         ylab = "Body Mass in Grams")
 ```
 
-
 Let's go back to the scatterplot we made last week and update it to use the `~` operator. We will also update the code to reflect that we can now send to `plot` the name of the data set using the `data` argument, letting us skip the `$`.
 
 ```{r lengthMassPlot}
@@ -440,4 +446,83 @@ plot(body_mass_g ~ bill_length_mm,
      ylab = "Body Mass in (g)")
 ```
 
-Notice the order here: the *y* variable (`body_mass_g`) is written first, then the tilde, then the *x* variable (`bill_length_mm`). This is because for scatterplots, the order is **y by x** or **y ~ x**. Be *very* careful setting up scatterplots! 
+Notice the order here: the *y* variable (`body_mass_g`) is written first, then the tilde, then the *x* variable (`bill_length_mm`). This is because for scatterplots, the order is **y by x** or **y \~ x**. Be *very* careful setting up scatterplots!
+
+# Miscellaneous Advanced Topics
+
+## The Pipe
+R has a native "pipe" operator `|>` that passes the result of the left-hand-side expression to the right-hand-side expression as the first argument in the call.
+
+`x |> f(y)` is interpreted as `f(x, y)`
+
+```{r}
+penguins$species |> table() |> prop.table()
+```
+
+::: aside
+You may be familiar with the `magrittr` pipe, `%>%`. For simple use cases, the native pipe `|>` works the same as the `magrittr` pipe, but there are differences in more advanced usage: <https://www.tidyverse.org/blog/2023/04/base-vs-magrittr-pipe/>
+:::
+
+## Arranging plots
+Base R graphics rely on "graphical parameters" that are set either inside or outside calls to plotting functions. (See `?par` for full details.)
+
+To put two plots side by side, we can set the `mfrow` graphical parameter (`mf` might stand for "matrix figure") *before* calling `plot()`.
+
+```{r}
+#| output-location: slide
+par(mfrow = c(1, 2)) # 1 row, 2 columns
+
+plot(body_mass_g ~ flipper_length_mm, data = penguins,
+     main = "Body Mass vs. Flipper Length",
+     xlab = "Flipper length (mm)",
+     ylab = "Body mass (g)")
+
+plot(body_mass_g ~ bill_length_mm, data = penguins,
+     main = "Body Mass vs. Bill Length",
+     xlab = "Bill length (mm)",
+     ylab = "Body mass (g)")
+```
+
+**NOTE:** When outside of an RMarkdown or Quarto document, you'll sometimes need to reset the graphical parameters. Do this by calling `dev.off()` or by calling `par()` with the original parameters.
+
+## Line breaks in figure titles
+If you have a long figure title, you can break it onto multiple lines with `\n`:
+
+```{r}
+#| output-location: slide
+
+par(mfrow = c(1, 2))
+
+plot(body_mass_g ~ flipper_length_mm, data = penguins,
+     main = "This is a very very long figure title that gets cut off because it's too long",
+     xlab = "Flipper length (mm)",
+     ylab = "Body mass (g)")
+
+plot(body_mass_g ~ flipper_length_mm, data = penguins,
+     main = "This is a very very long figure title\nthat gets cut off because it's too long",
+     xlab = "Flipper length (mm)",
+     ylab = "Body mass (g)")
+```
+
+## `tapply()`
+
+The `tapply()` applies a function to a matrix. The function can be a predefined R function like `mean()` or a user-defined function. 
+
+The power of `tapply()` is that it allows for a vector to be split into groups, with the function applied to each group.
+
+The function has the generic structure
+
+```{r, eval = FALSE}
+tapply(y, x, FUN)
+```
+
+## Example: `tapply()`
+```{r}
+# calculate mean flipper length for each penguin species
+tapply(penguins$flipper_length_mm, penguins$species, mean)
+```
+
+```{r}
+# summarize flipper length for each penguin species
+tapply(penguins$flipper_length_mm, penguins$species, summary)
+```
